@@ -1,0 +1,28 @@
+name: Deploy Xray VLESS Reality
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up job
+        run: echo "Setting up job..."
+
+      - name: Install and run Xray
+        run: |
+          sudo apt update
+          sudo apt install curl -y
+          bash <(curl -Ls https://raw.githubusercontent.com/MHSanaei/3x-ui/master/install.sh)
+
+      - name: Configure Xray (VLESS Reality server)
+        run: |
+          sudo 3x-ui restart
+
+      - name: Show connection info
+        run: |
+          sudo 3x-ui info
+
+      - name: Complete job
+        run: echo "All done!"
